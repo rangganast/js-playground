@@ -18,6 +18,8 @@ export class Organizer {
   @Column({ type: 'varchar', nullable: true })
   image: string;
 
-  @OneToMany(() => Event, (event) => event.organizer)
+  @OneToMany(() => Event, (event) => event.organizer, {
+    onDelete: 'CASCADE',
+  })
   events: Event[];
 }

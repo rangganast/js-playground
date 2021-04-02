@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Event } from './entity/event.entity';
 import { EventsService } from './events.service';
 
@@ -16,6 +23,7 @@ export class EventsController {
     return this.eventsService.findOne(id);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   async findAll(): Promise<Event[]> {
     return this.eventsService.findAll();

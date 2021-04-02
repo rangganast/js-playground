@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Organizer } from 'src/models/organizers/entity/organizer.entity';
 import {
   Column,
@@ -24,37 +25,43 @@ export class Event {
   @Column({ type: 'int' })
   quota: number;
 
+  @Exclude()
   @Column({
-    name: 'registration_start',
+    name: 'registrationStart',
     type: 'datetime',
     nullable: true,
   })
   registrationStart: string;
 
+  @Exclude()
   @Column({
-    name: 'registration_end',
+    name: 'registrationEnd',
     type: 'datetime',
     nullable: true,
   })
   registrationEnd: string;
 
   @Column({
-    name: 'event_start',
+    name: 'eventStart',
     type: 'datetime',
     nullable: true,
   })
   eventStart: string;
 
+  @Exclude()
   @Column({
-    name: 'event_end',
+    name: 'eventEnd',
     type: 'datetime',
     nullable: true,
   })
   eventEnd: string;
 
+  @Column({ name: 'organizerId', nullable: true })
+  organizerId: number;
+
   @ManyToOne(() => Organizer, (organizer) => organizer.events, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'organizer_id' })
+  @JoinColumn({ name: 'organizerId' })
   organizer: Organizer;
 }
